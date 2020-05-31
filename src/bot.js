@@ -21,7 +21,10 @@ Client.on('ready', () => {
 
 Client.on('message', (message) => {
   if (message.author.bot) return;
-
+  if (
+    !message.channel.name.includes('dev-test', 'open-ticket', 'charity-ticket')
+  )
+    return;
   let embedMsg = new Discord.MessageEmbed()
     .setColor('#0099ff')
     .setTitle('Create Ticket Here!')
@@ -39,10 +42,6 @@ Client.on('message', (message) => {
       message.react('🎫');
     })
     .catch((err) => console.log(err));
-
-  let startMsgId = message.id;
-  console.log(`From within ${startMsgId}`);
-  return startMsgId;
 });
 
 Client.on('messageReactionAdd', async (reaction, user) => {
@@ -60,6 +59,17 @@ Client.on('messageReactionAdd', async (reaction, user) => {
     embedMsgTitle.toString() === 'Create Ticket Here!' &&
     reaction.emoji.name === '🎫'
   ) {
+    const userReactions = msg.reactions.cache.filter((reaction) =>
+      reaction.users.cache.has(user.id)
+    );
+    try {
+      for (const reaction of userReactions.values()) {
+        await reaction.users.remove(user.id);
+      }
+    } catch (error) {
+      console.error('Failed to remove reactions.');
+    }
+
     let findTicket = await ticket
       .findOne({
         where: { authorId: user.id, resolved: false },
