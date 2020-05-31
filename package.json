@@ -1,0 +1,23 @@
+{
+  "name": "tticket-bot",
+  "version": "1.0.0",
+  "description": "Discord Ticketing Bot",
+  "main": "./src/bot.js",
+  "scripts": {
+    "dev": "nodemon ./src/bot.js",
+    "start": "node ./src/bot.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "mariadb": "^2.4.0",
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
