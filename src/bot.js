@@ -29,7 +29,7 @@ Client.on('message', (message) => {
     .setColor('#0099ff')
     .setTitle('Create Ticket Here!')
     .setDescription(
-      'React to this message with 🎫 to open a ticket with Kedima!'
+      'React to this message with 🎟️ to open a ticket with Kedima!'
     )
     .setFooter(
       'TTicket coded by Taux#9643',
@@ -39,7 +39,7 @@ Client.on('message', (message) => {
   message.channel
     .send(embedMsg)
     .then((message) => {
-      message.react('🎫');
+      message.react('🎟️');
     })
     .catch((err) => console.log(err));
 });
@@ -57,7 +57,7 @@ Client.on('messageReactionAdd', async (reaction, user) => {
 
   if (
     embedMsgTitle.toString() === 'Create Ticket Here!' &&
-    reaction.emoji.name === '🎫'
+    reaction.emoji.name === '🎟️'
   ) {
     const userReactions = msg.reactions.cache.filter((reaction) =>
       reaction.users.cache.has(user.id)
